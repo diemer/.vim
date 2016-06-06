@@ -1,0 +1,6 @@
+*.swp
+session
+bundle
+autoload
+.DS_Store
+.netrwhist
