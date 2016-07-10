@@ -6,3 +6,4 @@ farneman/Expression-Engine-Vim-syntax
 scrooloose/nerdcommenter
 xolox/vim-session
 xolox/vim-misc
+valloric/YouCompleteMe
