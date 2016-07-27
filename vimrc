@@ -4,7 +4,7 @@ colorscheme one
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
     set macligatures
-    set guifont=Fira\ Code:h15
+    set guifont=Fira\ Code:h16
     set transparency=4
   endif
 else
@@ -74,6 +74,8 @@ set listchars=tab:▸\ ,eol:¬ "" Use the same symbols as TextMate for tabstops 
 "" vsplit previews in netrw
 let g:netrw_preview=1
 
+
+let g:session_autoload='no'
 let g:session_autosave='yes'
 let g:session_directory='~/.vim/session'
 
