@@ -35,11 +35,11 @@ set smartcase	"" Enable smart-case search
 set ignorecase	"" Always case-insensitive
 set incsearch	"" Searches for strings incrementally
 
-set tabstop=4
-set shiftwidth=4	"" Number of auto-indent spaces
-set softtabstop=4	"" Number of spaces per Tab
+set shiftwidth=2	"" Number of auto-indent spaces
+set softtabstop=2	"" Number of spaces per Tab
 
 set smartindent	"" Enable smart-indent
+set smarttab
 set expandtab "" Enable expandtab
 
 "" Advanced
@@ -50,8 +50,30 @@ set undolevels=1000	"" Number of undo levels
 set wildmode=longest,list,full	"" Bash-like tabbing for files
 set wildmenu
 
+""Vim Wiki
+set nocompatible
+filetype plugin on
+syntax on
+
 "" Map leader to ,
 let mapleader=','
+
+" The Silver Searcher
+" from https://robots.thoughtbot.com/faster-grepping-in-vim
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+" from https://robots.thoughtbot.com/faster-grepping-in-vim
+nnoremap K :grep! --word-regexp "<C-R><C-W>"<CR>:cw<CR>
 
 "" Switching windows
 noremap <C-j> <C-w>j
@@ -79,6 +101,8 @@ let g:session_autoload='no'
 let g:session_autosave='yes'
 let g:session_directory='~/.vim/session'
 
+let g:ConqueTerm_CloseOnEnd=1
+
 " Detect ExpressionEngine syntax from HTML
 au BufNewFile,BufRead *.html  call s:EEhtml()
 
@@ -93,5 +117,28 @@ fun! s:EEhtml()
   endwhile
 endfun
 
-"" Pathogen
-execute pathogen#infect()
+"" Pathogen - might come back to this
+"" execute pathogen#infect()
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-sensible'
+Plug 'mhinz/vim-startify'
+Plug 'brookhong/DBGPavim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'tpope/vim-sleuth'
+Plug 'valloric/MatchTagAlways'
+Plug 'datanoise/vim-crystal'
+Plug 'tpope/vim-unimpaired'
+Plug 'kchmck/vim-coffee-script'
+Plug 'slim-template/vim-slim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'leafgarland/typescript-vim'
+Plug 'slashmili/alchemist.vim'
+Plug 'lrvick/Conque-Shell'
+call plug#end()
